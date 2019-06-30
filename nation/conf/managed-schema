@@ -42,7 +42,7 @@
   </fieldType>
   <fieldType name="ignored" class="solr.StrField" indexed="false" stored="false" multiValued="true"/>
   <fieldType name="location" class="solr.LatLonPointSpatialField" docValues="true"/>
-  <fieldType name="location_rpt" class="solr.SpatialRecursivePrefixTreeFieldType" geo="true" maxDistErr="0.001" distErrPct="0.025" distanceUnits="kilometers" format="WKT"/>
+  <fieldType name="location_rpt" class="solr.SpatialRecursivePrefixTreeFieldType" geo="true" maxDistErr="0.001" spatialContextFactory="JTS" validationRule="repairBuffer0" distErrPct="0.025" distanceUnits="kilometers" format="WKT" autoIndex="true"/>
   <fieldType name="lowercase" class="solr.TextField" positionIncrementGap="100">
     <analyzer>
       <tokenizer class="solr.KeywordTokenizerFactory"/>
@@ -527,7 +527,7 @@
   <field name="WB_A3" type="string" omitNorms="true" multiValued="false" indexed="true" stored="true"/>
   <field name="WIKIDATAID" type="string" omitNorms="true" multiValued="false" indexed="true" stored="true"/>
   <field name="WIKIPEDIA" type="pint" omitNorms="true" multiValued="false" indexed="true" stored="true"/>
-  <field name="WKT" type="location_rpt" omitNorms="false" multiValued="false" indexed="true" stored="false"/>
+  <field name="WKT" type="location_rpt" omitNorms="false" multiValued="false" indexed="true" stored="true"/>
   <field name="WOE_ID" type="pint" omitNorms="true" multiValued="false" indexed="true" stored="true"/>
   <field name="WOE_ID_EH" type="pint" omitNorms="true" multiValued="false" indexed="true" stored="true"/>
   <field name="WOE_NOTE" type="text_en" omitNorms="false" multiValued="false" indexed="true" stored="true"/>

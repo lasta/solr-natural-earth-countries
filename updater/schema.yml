@@ -29,6 +29,8 @@ types:
   - name: location_rpt
     class: solr.SpatialRecursivePrefixTreeFieldType
     spatialContextFactory: JTS
+    autoIndex: true
+    validationRule: repairBuffer0
     geo: true
     format: WKT
     distErrPct: 0.025
@@ -40,7 +42,7 @@ fields:
   - name: WKT
     type: location_rpt
     indexed: true
-    stored: false
+    stored: true
     multiValued: false
     omitNorms: false
   - name: featurecla

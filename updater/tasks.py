@@ -114,6 +114,20 @@ def _index_document(document: Dict, core: str, server: str = DEFAULT_SOLR_URL):
         print(err.reason)
         raise err
 
+def _commit(core: str, server: str = DEFAULT_SOLR_URL):
+    url = f"{server}/{core}/update?commit=true"
+    req = Request(url)
+    try:
+        with urlopen(req) as res:
+            _ = res.read()
+    except HTTPError as err:
+        print(err.code)
+        print(err.reason)
+        raise err
+    except URLError as err:
+        print(err.reason)
+        raise err
+
 @task
 def update_schema(c, schema, core, server=DEFAULT_SOLR_URL):
     """
@@ -158,3 +172,4 @@ def index(c, data, core, server=DEFAULT_SOLR_URL):
         reader = csv.DictReader(csvfile, delimiter='\t')
         for row in reader:
             _index_document(row, core=core, server=server)
+    _commit(core=core, server=server)
