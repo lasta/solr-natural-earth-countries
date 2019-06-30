@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import json
-from urllib.request import Request, urlopen, HTTPError, URLError, HTTPResponse
+# TODO: Replase urllib to requests
+from urllib.request import Request, urlopen, HTTPError, URLError
 from typing import Dict, Iterator, List
 
 DEFAULT_SOLR_URL = 'http://localhost:8983/solr'
@@ -10,10 +11,10 @@ class SolrClient:
         self.base_url = base_url
         self.core = core
 
-    def upsert_field_types(self, field_types: Iterator[Dict]) -> List[HTTPResponse]:
+    def upsert_field_types(self, field_types: Iterator[Dict]) -> List:
         return [self.__upsert_field_type(field_type) for field_type in field_types]
     
-    def __upsert_field_type(self, field_type: Dict) -> HTTPResponse:
+    def __upsert_field_type(self, field_type: Dict):
         url = self.__build_url(suffix="schema")
         upsert_key = self.__switch_upsert_field_type_key(name=field_type['name'])
         data = {upsert_key, field_type}
@@ -53,15 +54,15 @@ class SolrClient:
     def __build_url(self, suffix: str) -> str:
         return f"{self.base_url}/{self.core}/{suffix}"
 
-    def index(self, documents: Iterator[Dict]) -> HTTPResponse:
+    def index(self, documents: Iterator[Dict]):
         # TODO
         pass
     
-    def commit(self) -> HTTPResponse:
+    def commit(self):
         # TODO
         pass
     
-    def delete_all_index(self) -> HTTPResponse:
+    def delete_all_index(self):
         # TODO
         pass
     
