@@ -1,0 +1,275 @@
+# variables
+searchable: &searchable
+  indexed: true
+  stored: true
+  multiValued: false
+string: &string
+  type: string
+  <<: *searchable
+  omitNorms: true
+integer_not_analyzed: &integer
+  type: pint
+  <<: *searchable
+  omitNorms: true
+double: &double
+  type: pdouble
+  <<: *searchable
+  omitNorms: true
+english: &english
+  type: text_en
+  <<: *searchable
+  omitNorms: false
+french: &french
+  type: text_fr
+  <<: *searchable
+  omitNorms: false
+
+# types
+types: 
+  - name: location_rpt
+    class: solr.SpatialRecursivePrefixTreeFieldType
+    spatialContextFactory: JTS
+    geo: true
+    format: WKT
+    distErrPct: 0.025
+    maxDistErr: 0.001
+    distanceUnits: kilometers
+
+# fields
+fields: 
+  - name: WKT
+    type: location_rpt
+    indexed: true
+    stored: false
+    multiValued: false
+    omitNorms: false
+  - name: featurecla
+    <<: *string
+  - name: scalerank
+    <<: *integer
+  - name: LABELRANK
+    <<: *integer
+  - name: SOVEREIGNT
+    <<: *english
+  - name: SOV_A3
+    <<: *string
+  - name: ADM0_DIF
+    <<: *integer
+  - name: LEVEL
+    <<: *integer
+  - name: TYPE
+    <<: *english
+  - name: ADMIN
+    <<: *english
+  - name: ADM0_A3
+    <<: *string
+  - name: GEOU_DIF
+    <<: *integer
+  - name: GEOUNIT
+    <<: *english
+  - name: GU_A3
+    <<: *string
+  - name: SU_DIF
+    <<: *integer
+  - name: SUBUNIT
+    <<: *english
+  - name: SU_A3
+    <<: *string
+  - name: BRK_DIFF
+    <<: *integer
+  - name: NAME
+    <<: *english
+  - name: NAME_LONG
+    <<: *english
+  - name: BRK_A3
+    <<: *string
+  - name: BRK_NAME
+    <<: *english
+  - name: BRK_GROUP
+    <<: *english
+  - name: ABBREV
+    <<: *english
+  - name: POSTAL
+    <<: *string
+  - name: FORMAL_EN
+    <<: *english
+  - name: FORMAL_FR
+    <<: *french
+  - name: NAME_CIAWF
+    <<: *english
+  - name: NOTE_ADM0
+    <<: *english
+  - name: NOTE_BRK
+    <<: *english
+  - name: NAME_SORT
+    <<: *english
+  - name: NAME_ALT
+    <<: *english
+  - name: MAPCOLOR7
+    <<: *integer
+  - name: MAPCOLOR8
+    <<: *integer
+  - name: MAPCOLOR9
+    <<: *integer
+  - name: MAPCOLOR13
+    <<: *integer
+  - name: POP_EST
+    <<: *integer
+  - name: POP_RANK
+    <<: *integer
+  - name: GDP_MD_EST
+    <<: *double
+  - name: POP_YEAR
+    <<: *integer
+  - name: LASTCENSUS
+    <<: *integer
+  - name: GDP_YEAR
+    <<: *integer
+  - name: ECONOMY
+    <<: *english
+  - name: INCOME_GRP
+    <<: *english
+  - name: WIKIPEDIA
+    <<: *integer
+  - name: FIPS_10_
+    <<: *string
+  - name: ISO_A2
+    <<: *string
+  - name: ISO_A3
+    <<: *string
+  - name: ISO_A3_EH
+    <<: *string
+  - name: ISO_N3
+    <<: *string
+  - name: UN_A3
+    <<: *string
+  - name: WB_A2
+    <<: *string
+  - name: WB_A3
+    <<: *string
+  - name: WOE_ID
+    <<: *integer
+  - name: WOE_ID_EH
+    <<: *integer
+  - name: WOE_NOTE
+    <<: *english
+  - name: ADM0_A3_IS
+    <<: *string
+  - name: ADM0_A3_US
+    <<: *string
+  - name: ADM0_A3_UN
+    <<: *integer
+  - name: ADM0_A3_WB
+    <<: *integer
+  - name: CONTINENT
+    <<: *english
+  - name: REGION_UN
+    <<: *english
+  - name: SUBREGION
+    <<: *english
+  - name: REGION_WB
+    <<: *english
+  - name: NAME_LEN
+    <<: *integer
+  - name: LONG_LEN
+    <<: *integer
+  - name: ABBREV_LEN
+    <<: *integer
+  - name: TINY
+    <<: *integer
+  - name: HOMEPART
+    <<: *integer
+  - name: MIN_ZOOM
+    <<: *double
+  - name: MIN_LABEL
+    <<: *double
+  - name: MAX_LABEL
+    <<: *double
+  - name: NE_ID
+    <<: *integer
+  - name: WIKIDATAID
+    <<: *string
+  - name: NAME_AR
+    type: text_ar
+    <<: *searchable
+    omitNorms: false
+  - name: NAME_BN
+    type: text_hi
+    <<: *searchable
+    omitNorms: false
+  - name: NAME_DE
+    type: text_de
+    <<: *searchable
+    omitNorms: false
+  - name: NAME_EN
+    type: text_en
+    <<: *searchable
+    omitNorms: false
+  - name: NAME_ES
+    type: text_es
+    <<: *searchable
+    omitNorms: false
+  - name: NAME_FR
+    type: text_fr
+    <<: *searchable
+    omitNorms: false
+  - name: NAME_EL
+    type: text_el
+    <<: *searchable
+    omitNorms: false
+  - name: NAME_HI
+    type: text_hi
+    <<: *searchable
+    omitNorms: false
+  - name: NAME_HU
+    type: text_hu
+    <<: *searchable
+    omitNorms: false
+  - name: NAME_ID
+    type: text_id
+    <<: *searchable
+    omitNorms: false
+  - name: NAME_IT
+    type: text_it
+    <<: *searchable
+    omitNorms: false
+  - name: NAME_JA
+    type: text_ja
+    <<: *searchable
+    omitNorms: false
+  - name: NAME_KO
+    type: text_ko
+    <<: *searchable
+    omitNorms: false
+  - name: NAME_NL
+    type: text_nl
+    <<: *searchable
+    omitNorms: false
+  - name: NAME_PL
+    type: text_pt
+    <<: *searchable
+    omitNorms: false
+  - name: NAME_PT
+    type: text_pt
+    <<: *searchable
+    omitNorms: false
+  - name: NAME_RU
+    type: text_ru
+    <<: *searchable
+    omitNorms: false
+  - name: NAME_SV
+    type: text_sv
+    <<: *searchable
+    omitNorms: false
+  - name: NAME_TR
+    type: text_tr
+    <<: *searchable
+    omitNorms: false
+  - name: NAME_VI
+    type: text_ws
+    <<: *searchable
+    omitNorms: false
+  - name: NAME_ZH
+    type: text_cjk
+    <<: *searchable
+    omitNorms: false
