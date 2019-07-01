@@ -761,6 +761,24 @@
       -->
   </requestHandler>
 
+  <requestHandler name="/geocode" class="solr.SearchHandler">
+    <lst name="defaults">
+      <str name="echoParams">explicit</str>
+      <str name="q">*:*</str>
+      <str name="fl">
+          name:NAME,
+          iso_3166-1_alpha-2:ISO_A2,
+          iso_3166-1_alpha-3:ISO_A3
+      </str>
+      <bool name="spatial">true</bool>
+      <str name="fq">{!geofilt}</str>
+      <int name="d">0</int>
+      <str name="sfield">WKT</str>
+      <str name="wt">json</str>
+      <str name="indent">true</str>
+    </lst>
+  </requestHandler>
+
   <!-- A request handler that returns indented JSON by default -->
   <requestHandler name="/query" class="solr.SearchHandler">
     <lst name="defaults">
